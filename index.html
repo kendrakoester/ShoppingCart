@@ -33,11 +33,6 @@
                 cart.push(item);
             }
 
-            addItemToCart("Apple", 1.50, 1);
-            addItemToCart("Orange", 2.00, 1);
-            addItemToCart("Apple", 1.50, 1);
-            addItemToCart("Apple", 1.50, 3);
-
             // removeItemFromCart(name) - only removes one item
             function removeItemFromCart(name) 
             {
@@ -48,30 +43,77 @@
                         cart[i].count --;
                         if (cart[i].count === 0)
                         {
-                            cart.splice(i, 1);//splice - remove item from array
+                            removeItemFromCartAll(name);//splice - remove item from array
                         }
                         break;
                     }
                 }
             }
 
-            console.log(cart[0].count);
-            removeItemFromCart("Apple"); 
-            removeItemFromCart("Apple"); 
-            removeItemFromCart("Apple"); 
-            removeItemFromCart("Apple"); 
-            removeItemFromCart("Apple"); 
-            removeItemFromCart("Apple"); 
+            // removeItemFromCartAll(name) - removes all item
+            function removeItemFromCartAll(name)
+            {
+                for (var i in cart)
+                {
+                    if(cart[i].name === name)
+                    {
+                        cart.splice(i, 1);
+                        break;
+                    }
+                }
+
+            }
+
+            addItemToCart("Apple", 1.50, 1);
+            addItemToCart("Orange", 2.00, 1);
+            addItemToCart("Apple", 1.50, 1);
+            addItemToCart("Apple", 1.50, 3);
+            addItemToCart("Banana", .50, 1);
+            addItemToCart("Car", 150, 1);
+            addItemToCart("Toy", 6.50, 1);
+
+            console.log(cart.length);
             console.log(cart);
 
+            removeItemFromCartAll("Car");
 
-            // removeItemFromCartAll(name) - removes all item
+            console.log(cart.length);
+            console.log(cart);
 
             // clearCart() - clear all of cart
+            function clearCart() 
+            {
+                cart = [];
+            }
+
+            //clearCart();
+            //console.log(cart);
 
             // countCart() - return total count
+            function countCart()
+            {
+                var totalCount = 0;
+                for (var i in cart)
+                {
+                    totalCount += cart[i].count;
+                }
+                return totalCount;
+            }
+
+            console.log(countCart());
 
             // totalCart() - return total cost
+            function totalCost()
+            {
+                var totalCost = 0;
+                for (var i in cart)
+                {
+                    totalCost += cart[i].price;
+                }
+                return totalCost;
+            }
+
+            console.log(totalCost());
 
             // listCart() - array of items
 
