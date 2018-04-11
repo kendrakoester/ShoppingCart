@@ -34,9 +34,36 @@
             }
 
             addItemToCart("Apple", 1.50, 1);
-            console.log(cart);
+            addItemToCart("Orange", 2.00, 1);
+            addItemToCart("Apple", 1.50, 1);
+            addItemToCart("Apple", 1.50, 3);
 
             // removeItemFromCart(name) - only removes one item
+            function removeItemFromCart(name) 
+            {
+                for (var i in cart)
+                {
+                    if (cart[i].name === name)
+                    {
+                        cart[i].count --;
+                        if (cart[i].count === 0)
+                        {
+                            cart.splice(i, 1);//splice - remove item from array
+                        }
+                        break;
+                    }
+                }
+            }
+
+            console.log(cart[0].count);
+            removeItemFromCart("Apple"); 
+            removeItemFromCart("Apple"); 
+            removeItemFromCart("Apple"); 
+            removeItemFromCart("Apple"); 
+            removeItemFromCart("Apple"); 
+            removeItemFromCart("Apple"); 
+            console.log(cart);
+
 
             // removeItemFromCartAll(name) - removes all item
 
