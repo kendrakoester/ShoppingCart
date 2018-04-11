@@ -1,7 +1,61 @@
 <!doctype html>
 <html>
-<head>
-</head>
-<body>
+
+    <head>
+        <title></title>
+    </head>
+
+    <body>
+        <h1>Shopping Cart</h1>
+
+        <script>
+            
+            var cart = [];
+            var Item = function(name, price, count) 
+            {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+            };
+
+            // addItemToCart(name, price, count)
+            function addItemToCart(name, price, count) 
+            {
+                for (var i in cart) //verify same item isnt added
+                {
+                    if (cart[i].name === name) //if item is added increment count
+                    {
+                        cart[i].count += count;
+                        return;
+                    }
+                }
+                var item = new Item(name, price, count);
+                cart.push(item);
+            }
+
+            addItemToCart("Apple", 1.50, 1);
+            console.log(cart);
+
+            // removeItemFromCart(name) - only removes one item
+
+            // removeItemFromCartAll(name) - removes all item
+
+            // clearCart() - clear all of cart
+
+            // countCart() - return total count
+
+            // totalCart() - return total cost
+
+            // listCart() - array of items
+
+            // saveCart()
+
+            // loadCart() - load saved cart from local storage
+
+            
+
+        </script>
+
     </body>
+
 </html>
