@@ -31,6 +31,7 @@
                 }
                 var item = new Item(name, price, count);
                 cart.push(item);
+                saveCart();
             }
 
             // removeItemFromCart(name) - only removes one item
@@ -48,6 +49,7 @@
                         break;
                     }
                 }
+                saveCart();
             }
 
             // removeItemFromCartAll(name) - removes all item
@@ -61,33 +63,15 @@
                         break;
                     }
                 }
-
+                saveCart();
             }
-
-            addItemToCart("Apple", 1.50, 1);
-            addItemToCart("Orange", 2.00, 1);
-            addItemToCart("Apple", 1.50, 1);
-            addItemToCart("Apple", 1.50, 3);
-            addItemToCart("Banana", .50, 1);
-            addItemToCart("Car", 150, 1);
-            addItemToCart("Toy", 6.50, 1);
-
-            console.log(cart.length);
-            console.log(cart);
-
-            removeItemFromCartAll("Car");
-
-            console.log(cart.length);
-            console.log(cart);
 
             // clearCart() - clear all of cart
             function clearCart() 
             {
                 cart = [];
+                saveCart();
             }
-
-            //clearCart();
-            //console.log(cart);
 
             // countCart() - return total count
             function countCart()
@@ -100,8 +84,6 @@
                 return totalCount;
             }
 
-            console.log(countCart());
-
             // totalCart() - return total cost
             function totalCost()
             {
@@ -113,14 +95,40 @@
                 return totalCost;
             }
 
-            console.log(totalCost());
-
             // listCart() - array of items
+            function listCart()
+            {
+                var cartCopy = [];
+                for (var i in cart)
+                {
+                    var item = cart[i];
+                    var itemCopy = {};
+                    for (var p in item) 
+                    {
+                        itemCopy[p] = item[p];
+                    }
 
-            // saveCart()
+                    cartCopy.push(itemCopy);
+                }
+                return cartCopy;
+            }
+
+            // saveCart() - allows to go from page to page - add an item and display cart later
+            function saveCart() //use when edit is made to cart
+            {
+                localStorage.setItem("shoppingCart", JSON.stringify(cart)); //"name", value - convert to string or number
+            }
 
             // loadCart() - load saved cart from local storage
+            function loadCart()
+            {
+                cart = JSON.parse(localStorage.getItem("shoppingCart")); //this item will be a string - need to convert
+            }
 
+            loadCart();
+
+            var array = listCart();
+            console.log(array);
             
 
         </script>
