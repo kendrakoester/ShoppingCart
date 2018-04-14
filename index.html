@@ -23,6 +23,7 @@
             <ul id="show-cart">
                 <!-- -->
             </ul>
+            <div>Total Cart: $<span id="total-cart"></span></div>
         </div>
 
 
@@ -38,15 +39,21 @@
                 displayCart();
             });
 
+            $("#clear-cart").click(function(event){
+                clearCart();
+                displayCart();
+            });
+
             function displayCart()
             {
                 var cartArray = listCart();
                 var output = "";
                 for(var i in cartArray)
                 {
-                    output += "<li>"+cartArray[i].name+" "+cartArray[i].count+"</li>";
+                    output += "<li>"+cartArray[i].name+" "+cartArray[i].count+" "+cartArray[i].price+"</li>";
                 }
                 $("#show-cart").html(output);
+                $("#total-cart").html(totalCost());
             }
 
             // Shopping Cart Functions
@@ -66,6 +73,7 @@
                     if (cart[i].name === name) //if item is added increment count
                     {
                         cart[i].count += count;
+                        saveCart();
                         return;
                     }
                 }
@@ -130,7 +138,7 @@
                 var totalCost = 0;
                 for (var i in cart)
                 {
-                    totalCost += cart[i].price;
+                    totalCost += cart[i].price * cart[i].count;
                 }
                 return totalCost;
             }
@@ -167,10 +175,6 @@
 
             loadCart();
             displayCart();
-
-            var array = listCart();
-            console.log(array);
-            
 
         </script>
 
